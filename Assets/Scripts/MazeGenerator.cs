@@ -29,7 +29,7 @@ public class MazeGenerator : MonoBehaviour
 
     List<List<int>> map = new List<List<int>>();
 
-    
+
 
 
 
@@ -47,16 +47,18 @@ public class MazeGenerator : MonoBehaviour
         p.transform.position = new Vector3(2.91f, 1f, 4.6f);
     }
 
-    private List<Vector2> CheckNeighbors(Vector2 cell, List<Vector2> unvisited) {
+    private List<Vector2> CheckNeighbors(Vector2 cell, List<Vector2> unvisited)
+    {
         // Returns a list of cell's unvisited neighbors
         List<Vector2> list = new List<Vector2>();
 
         foreach (var n in cell_walls.Keys)
         {
-            if (unvisited.IndexOf((cell + n)) != -1) { 
-                list.Add(cell+ n);
+            if (unvisited.IndexOf((cell + n)) != -1)
+            {
+                list.Add(cell + n);
             }
-                    
+
         }
         return list;
     }
@@ -78,14 +80,12 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        Instantiate(enemy, new Vector3(40, 0, 20), Quaternion.identity);
-        Instantiate(weapon, new Vector3(5, 1, 5), Quaternion.identity);
-
         Vector2 current = new Vector2(0, 0);
 
         unvisited.Remove(current);
 
-        while (unvisited.Count > 0) {
+        while (unvisited.Count > 0)
+        {
             List<Vector2> neighbors = CheckNeighbors(current, unvisited);
 
             if (neighbors.Count > 0)
@@ -107,32 +107,36 @@ public class MazeGenerator : MonoBehaviour
                 unvisited.Remove(current);
 
             }
-            else if (stack.Count > 0) { 
+            else if (stack.Count > 0)
+            {
                 current = stack[stack.Count - 1];
                 stack.RemoveAt(stack.Count - 1);
-            
+
             }
 
-            
+
         }
 
         for (int i = 0; i < width; i++)
         {
-            
+
             for (int j = 0; j < height; j++)
             {
                 GameObject tile = GameObject.Instantiate(tiles[map[i][j]]);
                 tile.transform.parent = gameObject.transform;
 
-                tile.transform.Translate(new Vector3 (j*tile_size, 0, i * tile_size));
+                tile.transform.Translate(new Vector3(j * tile_size, 0, i * tile_size));
                 tile.name += " " + i.ToString() + ' ' + j.ToString();
                 tile.GetComponentInChildren<NavMeshSurface>().BuildNavMesh();
-               
+
             }
 
         }
 
+        Instantiate(enemy, new Vector3(4 * height + 5, 0.5f, 4 * width + 5), Quaternion.identity);
+        Instantiate(weapon, new Vector3(5, 1, 5), Quaternion.identity);
+
     }
 
-    
+
 }

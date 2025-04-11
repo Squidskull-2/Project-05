@@ -399,6 +399,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1526846489001483440, guid: 15322ddf723e2134193af68d5ba080da, type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
     - target: {fileID: 2592703167980409369, guid: 15322ddf723e2134193af68d5ba080da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.292
@@ -440,6 +444,10 @@ PrefabInstance:
       value: 6.354
       objectReference: {fileID: 0}
     - target: {fileID: 4834586977471560283, guid: 15322ddf723e2134193af68d5ba080da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443355236762624495, guid: 15322ddf723e2134193af68d5ba080da, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
