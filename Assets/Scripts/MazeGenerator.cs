@@ -14,6 +14,7 @@ public class MazeGenerator : MonoBehaviour
 
     public GameObject player;
     public GameObject enemy;
+    public GameObject weapon;
 
     const int N = 1;
     const int E = 2;
@@ -78,6 +79,7 @@ public class MazeGenerator : MonoBehaviour
         }
 
         Instantiate(enemy, new Vector3(40, 0, 20), Quaternion.identity);
+        Instantiate(weapon, new Vector3(5, 1, 5), Quaternion.identity);
 
         Vector2 current = new Vector2(0, 0);
 
