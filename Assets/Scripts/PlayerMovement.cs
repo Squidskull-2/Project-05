@@ -4,33 +4,37 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float jumpForce = 5f;
-    private Rigidbody rb;
-    public bool isGrounded = false;
+    public float moveSpeed;
+    public float jumpSpeed;
+    private float ySpeed;
+    private CharacterController charControl;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        charControl = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
+        float magnitude = Mathf.Clamp01(movementDirection.magnitude) * moveSpeed;
+        movementDirection.Normalize();
+
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
+            ySpeed = jumpSpeed;
         }
-    }
 
-    private void OnCollisionStay()
-    {
-        isGrounded = true;
-    }
+        Vector3 velocity = movementDirection * magnitude;
+        velocity.y = ySpeed;
 
-    private void OnCollisionExit()
-    {
-        isGrounded = false;
+        charControl.Move(velocity * Time.deltaTime);
     }
 }
