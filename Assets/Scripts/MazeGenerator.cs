@@ -12,9 +12,12 @@ public class MazeGenerator : MonoBehaviour
 {
     public GameObject[] tiles;
 
-    public GameObject player;
-    public GameObject enemy;
+    public GameObject enemyBasic;
+    public int enemyBasicCount;
+    public GameObject enemyTracker;
+    public int enemyTrackerCount;
     public GameObject weapon;
+    public GameObject door;
 
     const int N = 1;
     const int E = 2;
@@ -42,9 +45,6 @@ public class MazeGenerator : MonoBehaviour
         cell_walls[new Vector2(-1, 0)] = W;
 
         MakeMaze();
-
-        GameObject p = GameObject.Instantiate(player);
-        p.transform.position = new Vector3(2.91f, 1f, 4.6f);
     }
 
     private List<Vector2> CheckNeighbors(Vector2 cell, List<Vector2> unvisited)
@@ -133,9 +133,18 @@ public class MazeGenerator : MonoBehaviour
 
         }
 
-        Instantiate(enemy, new Vector3(4 * height + 5, 0.5f, 4 * width + 5), Quaternion.identity);
-        Instantiate(weapon, new Vector3(5, 1, 5), Quaternion.identity);
+        for (int i = 0; i < enemyBasicCount; i += 1)
+        {
+            Instantiate(enemyBasic, new Vector3((i + 3) * height + 5, 0.5f, (i + 3) * width + 5), Quaternion.identity);
+        }
 
+        for (int i = 0; i < enemyTrackerCount; i += 1)
+        {
+            Instantiate(enemyTracker, new Vector3((i + 4) * height + 5, 0.5f, (i + 4) * width + 5), Quaternion.identity);
+        }
+
+        Instantiate(weapon, new Vector3(5, 1, 5), Quaternion.identity);
+        Instantiate(door, new Vector3(9 * height + 5, 1.5f, 9 * width + 5), Quaternion.identity);
     }
 
 
